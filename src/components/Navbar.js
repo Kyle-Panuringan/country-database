@@ -47,8 +47,12 @@ const Navbar = () => {
 					<button>Sort by Population</button>
 
 					<label htmlFor="sort-region">Select a Region:</label>
-					<select name="sort-region" id="sort-region">
-						<option disabled selected value>
+					<select
+						name="sort-region"
+						id="sort-region"
+						defaultValue={"DEFAULT"}
+					>
+						<option value="DEFAULT" disabled>
 							-- select an option --
 						</option>
 						<option value="Africa">Africa</option>

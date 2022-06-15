@@ -17,6 +17,30 @@ code {
 		monospace;
 }
 
+ul {
+	list-style-type: none;
+}
+
+table,
+th,
+td {
+	margin-top: 10px;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th,
+td {
+	padding: 4px;
+}
+th {
+	width: 40%;
+}
+
+td {
+	width: 60%;
+}
+
 .logo {
 	margin: auto;
 	margin-top: 10%;
@@ -28,7 +52,7 @@ code {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 250px;
+	width: 20%;
 	height: 100%;
 	box-shadow: 0px 0px 17px rgb(43, 43, 43);
 	text-align: center;
@@ -61,7 +85,7 @@ code {
 }
 
 .nav-search button {
-	color: rgb(0, 140, 255);
+	color: rgb(3, 45, 94);
 	font-size: 1.1rem;
 	display: flex;
 	align-items: center;
@@ -94,7 +118,7 @@ code {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	box-shadow: 0px 0px 17px rgb(43, 43, 43);
+	box-shadow: 0px 7px 17px rgb(43, 43, 43);
 	cursor: pointer;
 }
 
@@ -107,4 +131,32 @@ code {
 
 .nav-buttons select {
 	text-align: center;
+}
+
+.main-content {
+	margin-left: 20%;
+}
+
+.main-content img {
+	width: 200px;
+	height: 100px;
+	object-fit: cover;
+}
+
+.main-content ul {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.main-content li {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	width: 300px;
+	margin: 10px 20px;
+	padding: 10px 0px;
+	border-radius: 10px;
+	background-color: aqua;
+	box-shadow: 0px 7px 15px rgb(78, 78, 78);
 }
