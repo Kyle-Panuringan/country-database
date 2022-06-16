@@ -45,7 +45,7 @@ const MainContent = () => {
 												<td>
 													{Object.values(
 														country.languages
-													).join(",")}
+													).join(", ")}
 												</td>
 											</tr>
 											{/* Currency */}

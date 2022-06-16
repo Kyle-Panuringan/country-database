@@ -21,6 +21,11 @@ ul {
 	list-style-type: none;
 }
 
+table {
+	table-layout: fixed;
+	width: 100%;
+}
+
 table,
 th,
 td {
@@ -29,16 +34,16 @@ td {
 	border-collapse: collapse;
 }
 
-th,
-td {
-	padding: 4px;
-}
 th {
+	background: lightblue;
 	width: 40%;
 }
 
 td {
-	width: 60%;
+	background: lightgreen;
+	padding: 10px;
+	overflow-x: auto;
+	white-space: nowrap;
 }
 
 .logo {
