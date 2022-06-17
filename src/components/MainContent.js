@@ -1,44 +1,42 @@
 import React, { useState, useEffect } from "react";
 
-const MainContent = () => {
-	const [countries, setCountries] = useState([]);
-	const [loading, setLoading] = useState(true);
-
-	const lan = useEffect(() => {
-		fetch("https://restcountries.com/v3.1/all")
-			.then((res) => {
-				if (res.ok) {
-					return res.json();
-				}
-				throw res;
-			})
-			.then((data) => {
-				setCountries(data);
-				setLoading(false);
-				console.log(data);
-			})
-			.catch((error) => {
-				console.log(`Error Fetching: ${error}`);
-			});
-	}, []);
-
+const MainContent = ({ loading, countries }) => {
 	return (
 		<div className="main-content">
+			{loading && <h2>Loading...</h2>}
 			<ul className="countries">
-				{loading && <h2>Loading...</h2>}
 				{loading ||
-					countries.map((country, index) => {
-						// Added a condition to exclude the following: Antarctica, Bouvet Island, Heard Island and McDonald Islands.
-						if (country.currencies) {
+					countries
+						.filter((country) => country.currencies)
+						.map((country, index) => {
 							return (
 								<li key={index}>
 									<img
 										src={country.flags.svg}
 										alt={country.name.common}
 									/>
-									<h2>{country.name.common}</h2>
+
 									<table>
+										<thead>
+											<tr>
+												<th
+													colSpan={2}
+													style={{
+														background: "blue",
+													}}
+												>
+													<h2>
+														{country.name.common}
+													</h2>
+												</th>
+											</tr>
+										</thead>
 										<tbody>
+											{/* Region */}
+											<tr>
+												<th>Region:</th>
+												<td>{country.region}</td>
+											</tr>
 											{/* Language */}
 											<tr>
 												<th>Language:</th>
@@ -48,47 +46,35 @@ const MainContent = () => {
 													).join(", ")}
 												</td>
 											</tr>
-											{/* Currency */}
 											<tr>
-												<th>Currency:</th>
+												<th>Population:</th>
 												<td>
-													{
-														Object.values(
-															country.currencies
-														)[0].name
-													}
-													(
-													{
-														Object.values(
-															country.currencies
-														)[0].symbol
-													}
-													)
-												</td>
-											</tr>
-											{/* Currency Symbol */}
-											<tr>
-												<th>Currency Symbol:</th>
-												<td>
-													{
-														Object.values(
-															country.currencies
-														)[0].symbol
-													}
+													{country.population
+														.toString()
+														.replace(
+															/\B(?=(\d{3})+(?!\d))/g,
+															","
+														)}
 												</td>
 											</tr>
 										</tbody>
 									</table>
-									<a
-										href={country.maps.googleMaps}
-										className="google-map-link"
-									>
-										Google Map
-									</a>
+
+									<div className="google-map-links">
+										<a
+											href={country.maps.googleMaps}
+											target="_blank"
+											className="google-map-link"
+										>
+											View Google Map
+										</a>
+										<a href="#" className="google-map-link">
+											View More Details
+										</a>
+									</div>
 								</li>
 							);
-						}
-					})}
+						})}
 			</ul>
 		</div>
 	);

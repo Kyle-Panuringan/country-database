@@ -2,7 +2,7 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import logo from "../logo.png";
 
-const Navbar = () => {
+const Navbar = ({ filterRegion, sortName, sortPopulation }) => {
 	const [inputValue, setInputValue] = React.useState("");
 
 	// To set blank the "inputValue" if the clear button is click
@@ -43,23 +43,26 @@ const Navbar = () => {
 				</div>
 
 				<div className="nav-buttons">
-					<button>Sort by Name</button>
-					<button>Sort by Population</button>
+					<label>Sort by:</label>
+					<button onClick={sortName}>Name</button>
+					<button onClick={sortPopulation}>Population</button>
 
-					<label htmlFor="sort-region">Select a Region:</label>
+					<label htmlFor="sort-region">Filter by Region:</label>
 					<select
 						name="sort-region"
 						id="sort-region"
 						defaultValue={"DEFAULT"}
+						onChange={filterRegion}
 					>
 						<option value="DEFAULT" disabled>
 							-- select an option --
 						</option>
+						<option value="All">All</option>
 						<option value="Africa">Africa</option>
 						<option value="Americas">Americas</option>
 						<option value="Asia">Asia</option>
 						<option value="Europe">Europe</option>
-						<option value="Ocenia">Ocenia</option>
+						<option value="Oceania">Oceania</option>
 					</select>
 				</div>
 			</div>
