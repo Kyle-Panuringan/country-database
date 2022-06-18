@@ -10,15 +10,16 @@ function App() {
 	const [search, setSearch] = useState("");
 	const [region, setRegion] = useState("All");
 	const [isModal, setIsModal] = useState(false);
-	const [{ countryAscend, populationAscend }, setAscend] = useState({
-		countryAscend: true,
-		populationAscend: true,
+	const [order, setAscend] = useState({
+		countryAscend: false,
+		countryActive: false,
+		populationAscend: false,
+		populationActive: false,
 	});
-	console.log(countryData);
 	// Sort by Country Name
 	function sortName() {
 		let nameOrder = [...countries];
-		if (countryAscend) {
+		if (!order.countryAscend) {
 			setCountries(
 				nameOrder.sort((a, b) => {
 					let x = a.name.common.toUpperCase();
@@ -32,7 +33,6 @@ function App() {
 					return 0;
 				})
 			);
-			setAscend({ countryAscend: !countryAscend });
 		} else {
 			setCountries(
 				nameOrder.sort((a, b) => {
@@ -47,23 +47,32 @@ function App() {
 					return 0;
 				})
 			);
-			setAscend({ countryAscend: !countryAscend });
 		}
+		setAscend({
+			countryAscend: !order.countryAscend,
+			countryActive: true,
+			populationAscend: !order.populationAscend,
+			populationActive: false,
+		});
 	}
 	// Sort by Population
 	function sortPopulation() {
 		let populationOrder = [...countries];
-		if (populationAscend) {
+		if (order.populationAscend) {
 			setCountries(
 				populationOrder.sort((a, b) => b.population - a.population)
 			);
-			setAscend({ populationAscend: !populationAscend });
 		} else {
 			setCountries(
 				populationOrder.sort((a, b) => a.population - b.population)
 			);
-			setAscend({ populationAscend: !populationAscend });
 		}
+		setAscend({
+			countryAscend: !order.countryAscend,
+			countryActive: false,
+			populationAscend: !order.populationAscend,
+			populationActive: true,
+		});
 	}
 	// To fetch countries API once the function is called
 	const fetchCountries = async () => {
@@ -90,6 +99,7 @@ function App() {
 				setSearch={setSearch}
 				region={region}
 				setRegion={setRegion}
+				order={order}
 			/>
 			<MainContent
 				countries={countries}

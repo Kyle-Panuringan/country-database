@@ -8,12 +8,15 @@ const Navbar = ({
 	setSearch,
 	region,
 	setRegion,
+	order,
 }) => {
+	console.log(order);
 	// To set clear the text in the search
 	function clearInput() {
 		setSearch("");
 	}
-
+	const countryArrow = order.countryAscend ? "▴" : "▾";
+	const populationArror = order.populationAscend ? "▾" : "▴";
 	return (
 		<div className="nav-base">
 			<div className="nav-header">
@@ -45,8 +48,16 @@ const Navbar = ({
 
 				<div className="nav-buttons">
 					<label>Sort by:</label>
-					<button onClick={sortName}>Name</button>
-					<button onClick={sortPopulation}>Population</button>
+					<button onClick={sortName}>
+						Name{" "}
+						{order.countryActive && <span>{countryArrow}</span>}
+					</button>
+					<button onClick={sortPopulation}>
+						Population{" "}
+						{order.populationActive && (
+							<span>{populationArror}</span>
+						)}
+					</button>
 
 					<label htmlFor="sort-region">Filter by Region:</label>
 					<select
