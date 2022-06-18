@@ -1,5 +1,7 @@
 import React from "react";
 import logo from "../logo.png";
+import logoMobile from "../logo-mobile.png";
+import logoText from "../logo-text-mobile.png";
 
 const Navbar = ({
 	sortName,
@@ -10,15 +12,35 @@ const Navbar = ({
 	setRegion,
 	order,
 }) => {
-	console.log(order);
+	const [open, setOpen] = React.useState(
+		window.matchMedia("(orientation:landscape)").matches ? true : false
+	);
 	// To set clear the text in the search
 	function clearInput() {
 		setSearch("");
 	}
 	const countryArrow = order.countryAscend ? "▴" : "▾";
 	const populationArror = order.populationAscend ? "▾" : "▴";
+	let style = open ? "block" : "none";
+
+	const testing = () => {
+		if (window.matchMedia("(orientation:landscape)").matches) {
+			setOpen(true);
+		} else {
+			setOpen(false);
+		}
+	};
+
+	React.useEffect(() => {
+		window.addEventListener("resize", testing);
+		return () => {
+			window.removeEventListener("resize", testing);
+		};
+	}, [open]);
+
 	return (
 		<div className="nav-base">
+			{/* Landscape Logo */}
 			<div className="nav-header">
 				<img
 					src={logo}
@@ -26,7 +48,23 @@ const Navbar = ({
 					alt="Logo of Country Database"
 				/>
 			</div>
-			<div className="nav-menu">
+			{/* Portrait Logo */}
+			<div className="nav-mobile">
+				<img
+					src={logoMobile}
+					className="logo-mobile"
+					alt="Logo of Country Database"
+				/>
+				<img
+					src={logoText}
+					className="logo-text"
+					alt="Logo of Country Database"
+				/>
+			</div>
+			<button className="openMobile" onClick={(e) => setOpen(true)}>
+				︾
+			</button>
+			<div className="nav-menu" style={{ display: `${style}` }}>
 				<div className="nav-search">
 					<input
 						type="text"
@@ -48,11 +86,11 @@ const Navbar = ({
 
 				<div className="nav-buttons">
 					<label>Sort by:</label>
-					<button onClick={sortName}>
+					<button onClick={sortName} className="nav-button">
 						Name{" "}
 						{order.countryActive && <span>{countryArrow}</span>}
 					</button>
-					<button onClick={sortPopulation}>
+					<button onClick={sortPopulation} className="nav-button">
 						Population{" "}
 						{order.populationActive && (
 							<span>{populationArror}</span>
@@ -75,6 +113,9 @@ const Navbar = ({
 						<option value="Oceania">Oceania</option>
 					</select>
 				</div>
+				<button className="closeMobile" onClick={(e) => setOpen(false)}>
+					︽
+				</button>
 			</div>
 		</div>
 	);
