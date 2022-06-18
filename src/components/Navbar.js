@@ -2,12 +2,16 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import logo from "../logo.png";
 
-const Navbar = ({ filterRegion, sortName, sortPopulation }) => {
-	const [inputValue, setInputValue] = React.useState("");
-
-	// To set blank the "inputValue" if the clear button is click
+const Navbar = ({
+	filterRegion,
+	sortName,
+	sortPopulation,
+	search,
+	setSearch,
+}) => {
+	// To set clear the text in the search input
 	function clearInput() {
-		setInputValue("");
+		setSearch("");
 	}
 
 	return (
@@ -27,14 +31,14 @@ const Navbar = ({ filterRegion, sortName, sortPopulation }) => {
 					<input
 						type="text"
 						placeholder="Search...."
-						value={inputValue}
+						value={search}
 						onChange={(e) => {
-							setInputValue(e.target.value);
+							setSearch(e.target.value);
 						}}
 					/>
 					<button
 						style={{
-							visibility: inputValue ? "visible" : "hidden",
+							visibility: search ? "visible" : "hidden",
 						}}
 						onClick={clearInput}
 					>
@@ -51,12 +55,9 @@ const Navbar = ({ filterRegion, sortName, sortPopulation }) => {
 					<select
 						name="sort-region"
 						id="sort-region"
-						defaultValue={"DEFAULT"}
 						onChange={filterRegion}
 					>
-						<option value="DEFAULT" disabled>
-							-- select an option --
-						</option>
+						<option disabled>-- select an option --</option>
 						<option value="All">All</option>
 						<option value="Africa">Africa</option>
 						<option value="Americas">Americas</option>

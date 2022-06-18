@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from "react";
 
-const MainContent = ({ loading, countries }) => {
+const MainContent = ({ loading, countries, search }) => {
 	return (
 		<div className="main-content">
 			{loading && <h2>Loading...</h2>}
 			<ul className="countries">
 				{loading ||
 					countries
-						.filter((country) => country.currencies)
+						.filter((country) => {
+							if (country.currencies) {
+								if (search === "") {
+									return country;
+								} else if (
+									country.name.common
+										.toLowerCase()
+										.startsWith(search.toLowerCase())
+								) {
+									return country;
+								}
+							}
+						})
 						.map((country, index) => {
 							return (
 								<li key={index}>

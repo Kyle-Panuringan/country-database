@@ -195,7 +195,3 @@ td {
 	color: red;
 	cursor: pointer;
 }
-/* width */
-::-webkit-scrollbar {
-	width: 10px;
-}

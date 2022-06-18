@@ -5,7 +5,7 @@ import MainContent from "./components/MainContent";
 function App() {
 	const [countries, setCountries] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
+	const [search, setSearch] = useState("");
 	const [{ countryAscend, populationAscend }, setAscend] = useState({
 		countryAscend: true,
 		populationAscend: true,
@@ -63,11 +63,7 @@ function App() {
 	}
 	// Filter by Region
 	function filterRegion(e) {
-		console.log(e.target.value);
 		const x = e.target.value === "All" ? "all" : `region/${e.target.value}`;
-		// fetch(`https://restcountries.com/v3.1/${x}`)
-		// 	.then((res) => res.json())
-		// 	.then((data) => setCountries(data));
 
 		const fetchRegion = async () => {
 			try {
@@ -82,7 +78,7 @@ function App() {
 		};
 		fetchRegion();
 	}
-
+	// To fetch countries API once the function is called
 	const fetchCountries = async () => {
 		try {
 			const response = await fetch("https://restcountries.com/v3.1/all");
@@ -93,7 +89,7 @@ function App() {
 			console.log("Hello", error);
 		}
 	};
-
+	// To initialize the fetchCountries() to fetch the API
 	useEffect(() => {
 		fetchCountries();
 	}, []);
@@ -104,11 +100,13 @@ function App() {
 				sortName={sortName}
 				sortPopulation={sortPopulation}
 				filterRegion={filterRegion}
+				search={search}
+				setSearch={setSearch}
 			/>
 			<MainContent
 				countries={countries}
 				loading={loading}
-				error={error}
+				search={search}
 			/>
 		</div>
 	);
