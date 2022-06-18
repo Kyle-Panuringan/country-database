@@ -6,10 +6,12 @@ function App() {
 	const [countries, setCountries] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [search, setSearch] = useState("");
+	const [region, setRegion] = useState("All");
 	const [{ countryAscend, populationAscend }, setAscend] = useState({
 		countryAscend: true,
 		populationAscend: true,
 	});
+	console.log(region);
 
 	// Sort by Country Name
 	function sortName() {
@@ -99,14 +101,16 @@ function App() {
 			<Navbar
 				sortName={sortName}
 				sortPopulation={sortPopulation}
-				filterRegion={filterRegion}
 				search={search}
 				setSearch={setSearch}
+				region={region}
+				setRegion={setRegion}
 			/>
 			<MainContent
 				countries={countries}
 				loading={loading}
 				search={search}
+				region={region}
 			/>
 		</div>
 	);

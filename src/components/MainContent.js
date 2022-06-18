@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const MainContent = ({ loading, countries, search }) => {
+const MainContent = ({ loading, countries, search, region }) => {
 	return (
 		<div className="main-content">
 			{loading && <h2>Loading...</h2>}
@@ -9,14 +9,26 @@ const MainContent = ({ loading, countries, search }) => {
 					countries
 						.filter((country) => {
 							if (country.currencies) {
-								if (search === "") {
-									return country;
-								} else if (
-									country.name.common
-										.toLowerCase()
-										.startsWith(search.toLowerCase())
-								) {
-									return country;
+								if (region === "All") {
+									if (search === "") {
+										return country;
+									} else if (
+										country.name.common
+											.toLowerCase()
+											.startsWith(search.toLowerCase())
+									) {
+										return country;
+									}
+								} else if (country.region === region) {
+									if (search === "") {
+										return country;
+									} else if (
+										country.name.common
+											.toLowerCase()
+											.startsWith(search.toLowerCase())
+									) {
+										return country;
+									}
 								}
 							}
 						})

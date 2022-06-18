@@ -2,11 +2,12 @@ import React from "react";
 import logo from "../logo.png";
 
 const Navbar = ({
-	filterRegion,
 	sortName,
 	sortPopulation,
 	search,
 	setSearch,
+	region,
+	setRegion,
 }) => {
 	// To set clear the text in the search
 	function clearInput() {
@@ -51,7 +52,8 @@ const Navbar = ({
 					<select
 						name="sort-region"
 						id="sort-region"
-						onChange={filterRegion}
+						value={region}
+						onChange={(e) => setRegion(e.target.value)}
 					>
 						<option disabled>-- select an option --</option>
 						<option value="All">All</option>
