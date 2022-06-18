@@ -1,5 +1,4 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
 import logo from "../logo.png";
 
 const Navbar = ({
@@ -9,7 +8,7 @@ const Navbar = ({
 	search,
 	setSearch,
 }) => {
-	// To set clear the text in the search input
+	// To set clear the text in the search
 	function clearInput() {
 		setSearch("");
 	}
@@ -25,9 +24,6 @@ const Navbar = ({
 			</div>
 			<div className="nav-menu">
 				<div className="nav-search">
-					<button>
-						<FaSearch />
-					</button>
 					<input
 						type="text"
 						placeholder="Search...."
