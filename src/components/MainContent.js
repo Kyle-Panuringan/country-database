@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-const MainContent = ({ loading, countries, search, region }) => {
+const MainContent = ({
+	loading,
+	countries,
+	search,
+	region,
+	setIsModal,
+	setCountryData,
+}) => {
 	return (
 		<div className="main-content">
 			{loading && <h2>Loading...</h2>}
@@ -8,10 +15,14 @@ const MainContent = ({ loading, countries, search, region }) => {
 				{loading ||
 					countries
 						.filter((country) => {
+							// Pass a value that only has currencies which are the actual countries
 							if (country.currencies) {
+								// Pass all the region if the condition is true
 								if (region === "All") {
+									// Pass all
 									if (search === "") {
 										return country;
+										// Return only the countries that contains the letter or word that match on the country name based on the user input startWith()
 									} else if (
 										country.name.common
 											.toLowerCase()
@@ -19,6 +30,7 @@ const MainContent = ({ loading, countries, search, region }) => {
 									) {
 										return country;
 									}
+									// Pass all the countries of a certain region if condition is met based on which region is selected on the select tag
 								} else if (country.region === region) {
 									if (search === "") {
 										return country;
@@ -32,21 +44,23 @@ const MainContent = ({ loading, countries, search, region }) => {
 								}
 							}
 						})
-						.map((country, index) => {
+						.map((country) => {
 							return (
-								<li key={index}>
+								<li key={country.name.common}>
+									{/* Flag Images */}
 									<img
 										src={country.flags.svg}
 										alt={country.name.common}
 									/>
-
+									{/* Country data inside the table */}
 									<table>
 										<thead>
 											<tr>
 												<th
 													colSpan={2}
 													style={{
-														background: "blue",
+														background:
+															"rgb(3, 45, 94)",
 													}}
 												>
 													<h2>
@@ -92,9 +106,16 @@ const MainContent = ({ loading, countries, search, region }) => {
 										>
 											View Google Map
 										</a>
-										<a href="#" className="google-map-link">
+										<button
+											className="google-map-link"
+											// Get a certain country data based on which country user click for the details that will be shown in ModalCountryDetails
+											onClick={() => {
+												setCountryData(country);
+												setIsModal(true);
+											}}
+										>
 											View More Details
-										</a>
+										</button>
 									</div>
 								</li>
 							);

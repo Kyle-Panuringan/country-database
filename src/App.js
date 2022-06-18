@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import MainContent from "./components/MainContent";
+import ModalCountryDetails from "./components/ModalCountryDetails";
 
 function App() {
 	const [countries, setCountries] = useState([]);
+	const [countryData, setCountryData] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [search, setSearch] = useState("");
 	const [region, setRegion] = useState("All");
+	const [isModal, setIsModal] = useState(false);
 	const [{ countryAscend, populationAscend }, setAscend] = useState({
 		countryAscend: true,
 		populationAscend: true,
 	});
-	console.log(region);
-
+	console.log(countryData);
 	// Sort by Country Name
 	function sortName() {
 		let nameOrder = [...countries];
@@ -63,23 +65,6 @@ function App() {
 			setAscend({ populationAscend: !populationAscend });
 		}
 	}
-	// Filter by Region
-	function filterRegion(e) {
-		const x = e.target.value === "All" ? "all" : `region/${e.target.value}`;
-
-		const fetchRegion = async () => {
-			try {
-				const response = await fetch(
-					`https://restcountries.com/v3.1/${x}`
-				);
-				const data = await response.json();
-				setCountries(data);
-			} catch (error) {
-				console.log("Hello", error);
-			}
-		};
-		fetchRegion();
-	}
 	// To fetch countries API once the function is called
 	const fetchCountries = async () => {
 		try {
@@ -111,6 +96,13 @@ function App() {
 				loading={loading}
 				search={search}
 				region={region}
+				setIsModal={setIsModal}
+				setCountryData={setCountryData}
+			/>
+			<ModalCountryDetails
+				isModal={isModal}
+				setIsModal={setIsModal}
+				countryData={countryData}
 			/>
 		</div>
 	);
