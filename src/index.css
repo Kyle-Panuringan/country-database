@@ -150,7 +150,7 @@ td {
 }
 
 .main-content {
-	margin-left: 20%;
+	margin-left: 18.9%;
 }
 
 .main-content img {
@@ -337,7 +337,7 @@ button {
 		position: absolute;
 		background-color: rgb(0, 100, 167);
 		width: 100%;
-		margin-top: 75px;
+		margin: 75px auto 0 auto;
 		display: none;
 		flex-direction: column;
 	}
