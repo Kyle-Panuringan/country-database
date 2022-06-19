@@ -61,7 +61,12 @@ const Navbar = ({
 					alt="Logo of Country Database"
 				/>
 			</div>
-			<button className="openMobile" onClick={(e) => setOpen(true)}>
+			<button
+				className="openMobile"
+				onClick={() => {
+					setOpen(true);
+				}}
+			>
 				︾
 			</button>
 			<div className="nav-menu" style={{ display: `${style}` }}>
