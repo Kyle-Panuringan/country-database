@@ -10,7 +10,7 @@ const MainContent = ({
 }) => {
 	return (
 		<div className="main-content">
-			{loading && <h2>Loading...</h2>}
+			{loading && <h2 className="loading">Loading...</h2>}
 			<ul className="countries">
 				{loading ||
 					countries

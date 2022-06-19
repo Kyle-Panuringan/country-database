@@ -12,31 +12,13 @@ const Navbar = ({
 	setRegion,
 	order,
 }) => {
-	const [open, setOpen] = React.useState(
-		window.matchMedia("(orientation:landscape)").matches ? true : false
-	);
+	const [show, setShow] = React.useState(false);
 	// To set clear the text in the search
 	function clearInput() {
 		setSearch("");
 	}
 	const countryArrow = order.countryAscend ? "▴" : "▾";
 	const populationArror = order.populationAscend ? "▾" : "▴";
-	let style = open ? "block" : "none";
-
-	const testing = () => {
-		if (window.matchMedia("(orientation:landscape)").matches) {
-			setOpen(true);
-		} else {
-			setOpen(false);
-		}
-	};
-
-	React.useEffect(() => {
-		window.addEventListener("resize", testing);
-		return () => {
-			window.removeEventListener("resize", testing);
-		};
-	}, [open]);
 
 	return (
 		<div className="nav-base">
@@ -64,12 +46,12 @@ const Navbar = ({
 			<button
 				className="openMobile"
 				onClick={() => {
-					setOpen(true);
+					setShow(true);
 				}}
 			>
 				︾
 			</button>
-			<div className="nav-menu" style={{ display: `${style}` }}>
+			<div className={`nav-menu ${show && "active"}`}>
 				<div className="nav-search">
 					<input
 						type="text"
@@ -118,7 +100,12 @@ const Navbar = ({
 						<option value="Oceania">Oceania</option>
 					</select>
 				</div>
-				<button className="closeMobile" onClick={(e) => setOpen(false)}>
+				<button
+					className="closeMobile"
+					onClick={() => {
+						setShow(false);
+					}}
+				>
 					︽
 				</button>
 			</div>

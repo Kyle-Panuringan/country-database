@@ -46,6 +46,7 @@ td {
 }
 
 td {
+	width: 100%;
 	padding: 10px;
 	overflow-x: auto;
 	white-space: nowrap;
@@ -302,6 +303,15 @@ button {
 	display: none;
 }
 
+.loading {
+	color: #28d800;
+	font-size: 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
 @media (orientation: portrait) {
 	.logo {
 		display: none;
@@ -335,12 +345,15 @@ button {
 		margin: 120px auto 50px auto;
 	}
 	.nav-menu {
+		display: none;
 		position: absolute;
 		background-color: rgb(0, 100, 167);
 		width: 100%;
 		margin: 75px auto 0 auto;
 		flex-direction: column;
-		overflow: hidden;
+	}
+	.active {
+		display: block;
 	}
 	.nav-search {
 		background: white;
