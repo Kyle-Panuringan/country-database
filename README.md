@@ -6,4 +6,4 @@ Country Database is a database of information about countries around the world
 
 Country Database project is build with React JS
 
-Live Demo: https://kyle-panuringan.github.io/country-database
+Live Demo: [Country Database](https://kyle-panuringan.github.io/country-database).
